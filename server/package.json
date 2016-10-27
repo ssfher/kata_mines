@@ -1,0 +1,24 @@
+{
+  "name": "MinesWeeper-Kata-Server",
+  "version": "0.0.1",
+  "description": "MinesWeeper Kata - Client",
+  "license" : "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:j0n4s/kata_mines.git"
+  },
+  "scripts": {
+    "start": "node app.js"
+  },
+  "dependencies": {
+    "express": "3.4.0",
+    "q": ">=1.4.1",
+    "underscore": "1.6.0"
+  },
+  "devDependencies": {
+    "less-middleware": ">=2.1.0"
+  },
+  "engines": {
+    "node": ">=4.2.0"
+  }
+}
