@@ -14,11 +14,24 @@ describe('Controller: minesweeper', function () {
   }));
 
   describe('On instance', function () {
-    it('should set "controller_loaded" variable in scope', function () {
+    it('should set "controller_loaded" and mines variable in scope', function () {
       expect(scope.controller_loaded).toContain('loaded');
+      expect(scope.mines).toEqual([1,8]);
+      expect(scope.positions).toEqual([[1,2,3],[4,5,6],[7,8,9]]);
     });
+    it('should show if a mine is clicked or how many mines are around the position', function(){
+      /*var number_mines = scope.verifyMine(scope.positions,scope.mines,3);
+      expect(number_mines).toBe(0);*/
+      var number_mines = scope.verifyMine(scope.positions,scope.mines,4);
+      expect(number_mines).toBe(2);
+      /* number_mines = scope.verifyMine(scope.positions,scope.mines,5);
+      expect(number_mines).toBe(2);*/
+    });
+    
+
   });
 
+ 
   describe('when going to /minesweeper', function () {
 
     var route, location, rootScope, httpBackend;
