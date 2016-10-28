@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('Minesweeper')
-.controller('minesweeper', function ($scope, _) {
+.controller('minesweeper', function ($scope) {
 
   $scope.controller_loaded = 'Minesweeper loaded!';
 
