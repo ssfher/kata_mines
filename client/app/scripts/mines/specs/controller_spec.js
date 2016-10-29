@@ -20,13 +20,13 @@ describe('Controller: minesweeper', function () {
       expect(scope.positions).toEqual([[1,2,3],[4,5,6],[7,8,9]]);
     });
     it('should show if a mine is clicked or how many mines are around the position', function(){
-      var number_mines = scope.verifyMine(scope.positions,scope.mines,9);
+      var number_mines = scope.verifyMine(9);
       expect(number_mines).toBe(1);
-      var number_mines2 = scope.verifyMine(scope.positions,scope.mines,1);
+      var number_mines2 = scope.verifyMine(1);
       expect(number_mines2).toBe(-1);
-      var number_mines3 = scope.verifyMine(scope.positions,scope.mines,3);
+      var number_mines3 = scope.verifyMine(3);
       expect(number_mines3).toBe(0);
-      var number_mines4 = scope.verifyMine(scope.positions,scope.mines,5);
+      var number_mines4 = scope.verifyMine(5);
       expect(number_mines4).toBe(2);
     });
     

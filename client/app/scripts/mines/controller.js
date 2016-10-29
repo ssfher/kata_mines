@@ -5,7 +5,11 @@ angular.module('Minesweeper')
   $scope.controller_loaded = 'loaded';
   $scope.mines = [1,8];
   $scope.positions = [[1,2,3],[4,5,6],[7,8,9]];
-  $scope.verifyMine=function(positions, mines , position){
+  $scope.verify = ['?','?','?','?','?','?','?','?','?'];
+  $scope.explode='';
+  $scope.verifyMine=function(position){
+  	var positions = $scope.positions;
+  	var mines = $scope.mines;
   	var lRow = positions.length;
   	var rows = [];
   	var cols = [];
@@ -55,10 +59,11 @@ angular.module('Minesweeper')
     }
   	for( k=0; k<mines.length; k++){
   		if(mines[k]===position){
-  			numMines=-1;
+  			numMines='*';
+  			$scope.explode='Has perdido!!!';
   		}
   	}
-  	return numMines;
+  	$scope.verify[position-1]=numMines;
   };
 })
 .config(function ($routeProvider) {
