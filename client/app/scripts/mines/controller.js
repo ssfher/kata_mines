@@ -6,93 +6,53 @@ angular.module('Minesweeper')
   $scope.mines = [1,8];
   $scope.positions = [[1,2,3],[4,5,6],[7,8,9]];
   $scope.verifyMine=function(positions, mines , position){
-  	console.log('position:'+position);
-	  			
-  	var lRow = 3;
+  	var lRow = positions.length;
   	var rows = [];
   	var cols = [];
   	var numMines = 0;
-  	var i=0;
-  	var j=0;
-  	var k=0;
-  	var tempFila=[];
-  	var tempCols= [];
-  	var tempPosition =0;
-  	var max = 0;
-  	for(i=0;i<positions.length;i++){
-  		rows.push(positions[i]);
+  	var rowsPosition=-1;
+  	var colsPosition=-1;
+  	//crea filas
+  	for(var m=0;m<positions.length;m++){
+  		rows.push(positions[m]);
   	}
-  	for( i=0;i<lRow;i++){
+  	//crea Columnas
+  	for(var i=0;i<lRow;i++){
   		cols[i]=[];
   		var tmpArray =[];
-  		for( j=0;j<lRow;j++){
+  		for( var j=0;j<lRow;j++){
   			tmpArray.push(positions[j][i]);
   		}
   		cols[i]=tmpArray;
   	}
-  	//recorrer filas
-  	for( i = 0 ; i<rows.length ; i++){
-  		tempFila= [];
-		tempPosition=-1;
-		for( j=0; j<rows[i].length; j++){
-  			for( k=0; k<mines.length; k++){
-  				if(mines[k] === rows[i][j]){
-   					tempFila = rows[i];
-  				}
-  			}
-  			if(rows[i][j]===position){
-  				tempPosition=j;
+  	//verificar posición en filas
+  	for(var k=0;k<rows.length;k++){
+  		for(var l=0;l<rows[k].length;l++){
+  			if(rows[k][l]===position){
+  				rowsPosition=k;
+  				colsPosition=l;
   			}
   		}
-  		max = tempFila.length;
-  		if(tempPosition>=0){
-	  		for(k = 0; k<mines.length;k++){
-
-	  			if(tempFila[tempPosition-1]===mines[k]){
-	  				numMines++;
-	  				break;
-	  			}
-	  			if(tempFila[tempPosition+1]===mines[k]){
-	  				numMines++;
-	  				break;
-	  			}
-	  		}
-  		}
-	  	
   	}
-  	console.log('mines :'+numMines);
-  	for( i = 0 ; i<cols.length ; i++){
-  		tempCols= [];
-		tempPosition=-1;
-		for( j=0; j<cols[i].length; j++){
-  			for( k=0; k<mines.length; k++){
-  				if(mines[k] === cols[i][j]){
-   					tempCols = cols[i];
-  				}
-  				if(cols[i][j]===position){
-  					tempPosition=j;
-  				}
-  			}
-  		}
-  		console.log('tempCols :'+tempCols);
-  		console.log('tempPosition :'+tempPosition);
-  		
-  		max = tempCols.length;
-  		if(tempPosition>=0){
-	  		for(k = 0; k<mines.length;k++){
-	  			if(tempCols[tempPosition-1]===mines[k]){
-	  				numMines++;
-	  				break;
-	  			}
-	  			if(tempCols[tempPosition+1]===mines[k]){
-	  				numMines++;
-	  				break;
-	  			}
-	  		}
-  		}
-	  	
-  	}
-
+  	var rBack = rowsPosition-1;
+    var rNext = rowsPosition+1;
+    var cBack = colsPosition-1;
+    var cNext = colsPosition+1;
+    var aroundValues = [];
+    for(var o=rBack;o<=rNext;o++){
+    	for(var n=cBack;n<=cNext;n++){
+    		if(o>=0&&n>=0&&o<lRow&&n<lRow){
+	 			aroundValues.push(positions[o][n]);
+	 		}
+    	}
+    }
+    for(var p=0;p<aroundValues.length;p++){
+    	for(var q=0;q<mines.length;q++){
+    		if(mines[q]===aroundValues[p]){
+    			numMines++;
+    		}
+    	}
+    }
   	for( k=0; k<mines.length; k++){
   		if(mines[k]===position){
   			numMines=-1;
